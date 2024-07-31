@@ -1,6 +1,8 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import React from "react";
-
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 const Navbar = () => {
   return (
     <>
@@ -10,9 +12,10 @@ const Navbar = () => {
             <h1>Auto HR</h1>
           </div>
           <div>
-            <div className="h-[40px] w-[120px] bg-[#6D31ED] flex items-center rounded-md mt-1">
-              {/* <p className="mx-auto text-white">Signup/Signin</p> */}
-              <Button>Signup/Signin</Button>
+            <div className="h-[40px] w-[120px]  flex items-center rounded-md mt-1">
+              <Button>
+                <Link href="/register">Sign up</Link>
+              </Button>
             </div>
           </div>
         </div>

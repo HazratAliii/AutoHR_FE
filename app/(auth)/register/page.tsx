@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Register = () => {
   return (
@@ -24,6 +25,14 @@ const Register = () => {
               <hr className="w-full border-gray-300" />
             </div>
             <Button className="mt-4">Sign up with Google</Button>
+            <div className="flex justify-center">
+              <p>
+                Already have an account?{" "}
+                <Link href="/login" className="text-blue-600">
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

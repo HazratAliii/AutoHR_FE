@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -21,6 +22,14 @@ const Login = () => {
               <hr className="w-full border-gray-300" />
             </div>
             <Button className="mt-4">Sign in with Google</Button>
+            <div className="flex justify-center">
+              <p>
+                New here?{" "}
+                <Link href="/register" className="text-blue-600">
+                  Sign up
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
