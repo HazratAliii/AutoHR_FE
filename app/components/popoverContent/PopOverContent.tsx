@@ -15,12 +15,15 @@ const PopOverContent = () => {
         {Items.map((item) => {
           const Icon = item.icon;
           return (
-            <div className="flex items-center cursor-pointer gap-2">
-              <span>
-                <Icon />
-              </span>{" "}
-              <span>{item.label}</span>
-            </div>
+            <>
+              <div className="flex items-center cursor-pointer gap-2">
+                <span>
+                  <Icon />
+                </span>{" "}
+                <span>{item.label}</span>
+              </div>
+              <hr />
+            </>
           );
         })}
       </div>
