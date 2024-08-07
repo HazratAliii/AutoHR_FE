@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useSignUp } from "@/services/auth.service";
+import AuthService from "@/services/auth.service";
 import { useRouter } from "next/navigation";
+import { useTokenStore } from "@/app/stores/auth.store";
 
 type formFields = {
   firstName: string;
@@ -16,7 +17,7 @@ type formFields = {
 };
 
 const Register = () => {
-  const { mutate } = useSignUp();
+  const { mutate } = AuthService.useSignUp();
   const router = useRouter();
   const {
     register,
@@ -24,7 +25,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<formFields>();
 
-  const onSubmit: SubmitHandler<formFields> = async (data) => {
+  const token = useTokenStore((state) => state.token);
+  const onSubmit: SubmitHandler<formFields> = async (data: formFields) => {
     console.log(data);
     const obj = {
       first_name: data.firstName,
@@ -42,6 +44,9 @@ const Register = () => {
     });
   };
 
+  useEffect(() => {
+    token ? router.push("/") : router.push("/register");
+  }, [token, router]);
   return (
     <>
       <div className="h-[calc(100vh-50px)] flex items-center justify-center">

@@ -4,3 +4,8 @@ export interface UserSignUp {
   gmail: String;
   password: String;
 }
+
+export interface UserSignIn {
+  gmail: String;
+  password: String;
+}

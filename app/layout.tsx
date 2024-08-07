@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/utils/queryClient";
+import NextTopLoader from "nextjs-toploader";
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -22,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           <Navbar />
+          <NextTopLoader />
           {children}
         </QueryClientProvider>
       </body>
