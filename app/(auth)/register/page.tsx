@@ -27,7 +27,6 @@ const Register = () => {
 
   const token = useTokenStore((state) => state.token);
   const onSubmit: SubmitHandler<formFields> = async (data: formFields) => {
-    console.log(data);
     const obj = {
       first_name: data.firstName,
       last_name: data.lastName,

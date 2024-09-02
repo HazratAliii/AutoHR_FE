@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -18,6 +18,14 @@ const Login = () => {
   const router = useRouter();
   const setToken = useTokenStore((state) => state.setToken);
   const token = useTokenStore((state) => state.token);
+  const setUserInfo = useTokenStore((state) => state.setUserInfo);
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["googleLogin"],
+  //   queryFn: () => AuthService.useGoogleLogin(),
+  //   enabled,
+  // });
+  // console.log(data);
+
   const {
     register,
     handleSubmit,
@@ -25,10 +33,10 @@ const Login = () => {
   } = useForm<formFields>();
 
   const onSubmit: SubmitHandler<formFields> = async (data: formFields) => {
-    console.log("func ", data);
     await mutate(data, {
-      onSuccess: () => {
+      onSuccess: (res: any) => {
         setToken();
+        setUserInfo();
         router.push("/");
       },
       onError: () => {
@@ -37,7 +45,17 @@ const Login = () => {
     });
   };
 
+  const handleGoogleLogin = () => {
+    // console.log("Inside handle function");
+    // setEnabled(true);
+    console.log(
+      "first ",
+      (window.location.href = "http://localhost:5000/auth/google/callback")
+    );
+  };
   useEffect(() => {
+    // Debugging: Log the token value
+    // Redirect based on token presence
     token ? router.push("/") : router.push("/login");
   }, [token, router]);
 
@@ -89,7 +107,9 @@ const Login = () => {
               <span className="mx-4 text-gray-500">or</span>
               <hr className="w-full border-gray-300" />
             </div>
-            <Button className="mt-4">Sign in with Google</Button>
+            <Button className="mt-4" onClick={handleGoogleLogin}>
+              Sign in with Google
+            </Button>
             <div className="flex justify-center">
               <p>
                 New here?{" "}

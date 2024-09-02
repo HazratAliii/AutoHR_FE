@@ -9,3 +9,9 @@ export interface UserSignIn {
   gmail: String;
   password: String;
 }
+
+export interface teamType {
+  user_id: string;
+  name: string;
+  members: [string];
+}

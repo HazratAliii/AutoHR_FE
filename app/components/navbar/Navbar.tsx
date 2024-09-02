@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const token = useTokenStore((state) => state.token);
+  const deleteToken = useTokenStore((state) => state.deleteToken);
   const [isClient, setIsClient] = useState(false);
-
+  const handleLogout = () => {
+    deleteToken();
+  };
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -21,9 +24,9 @@ const Navbar = () => {
           </div>
           <div>
             <div className="h-[40px] w-[120px] flex items-center rounded-md mt-1">
-              <Button>
+              <Button onClick={handleLogout}>
                 {isClient && (
-                  <Link href={token ? "/logout" : "/register"}>
+                  <Link href={token ? "/login" : "/register"}>
                     {token ? "Logout" : "Signup"}
                   </Link>
                 )}

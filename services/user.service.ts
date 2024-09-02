@@ -1,17 +1,37 @@
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
+import axios from "axios";
 
-// export const useGetUsers = () => {
-//   return useQuery({
-//     queryKey: ["users"],
-//     queryFn: async () => {
-//       const data = await axios.get("http://localhost:5000/api/user", {
-//         headers: {
-//           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDJhY2U1LWI2YTEtNGNkMi1iZWNmLWJkZWY1YjhlZWQ3YiIsImlhdCI6MTcyMjQ5ODE4MiwiZXhwIjoxNzIyNTAxNzgyfQ.pDE8594dZVTozOvku9JSXBTKApHFtrQ8QQT4W-bNid4`,
-//         },
-//       });
-//       console.log(data);
-//       return data;
-//     },
-//   });
-// };
+class UserService {
+  static fetchAllUsers = async (token: string) => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      throw new Error("Failed to fetch users");
+    }
+  };
+
+  static fetchUserInfo = async (token: string, id: string) => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status !== 200) {
+      throw new Error("Something went wrong");
+    }
+    return response.data;
+  };
+}
+
+export default UserService;
